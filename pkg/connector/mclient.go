@@ -33,7 +33,7 @@ import (
 
 type newMCFunc = func(json.RawMessage, mWAClient) mClient
 
-var newMC newMCFunc
+var NewMC newMCFunc
 
 func init() {
 	path := os.Getenv("WM_PLUGIN_PATH")
@@ -42,12 +42,12 @@ func init() {
 	}
 	plug := exerrors.Must(plugin.Open(path))
 	sym := exerrors.Must(plug.Lookup("NewClient"))
-	newMC = sym.(newMCFunc)
+	NewMC = sym.(newMCFunc)
 }
 
 func (wa *WhatsAppClient) initMC() {
-	if newMC != nil {
-		wa.MC = newMC(wa.UserLogin.Metadata.(*waid.UserLoginMetadata).MData, wa)
+	if NewMC != nil {
+		wa.MC = NewMC(wa.UserLogin.Metadata.(*waid.UserLoginMetadata).MData, wa)
 	}
 }
 
