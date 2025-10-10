@@ -31,7 +31,7 @@ import (
 	"go.mau.fi/mautrix-whatsapp/pkg/waid"
 )
 
-type newMCFunc func(json.RawMessage, mWAClient) mClient
+type newMCFunc = func(json.RawMessage, mWAClient) mClient
 
 var newMC newMCFunc
 
